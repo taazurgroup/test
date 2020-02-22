@@ -1,0 +1,46 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Custom Script",
+  "dt": "Item",
+  "modified": "2019-10-08 15:50:20.876149",
+  "name": "Item-Client",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Item', {\n\tvalidate(frm) {\n\t\t// your code here\n\t\tif (frm.doc.item_group==\"All Item Groups\") {\n\t\t    msgprint(\"Item Group All Item Groups not allowed\");\n\t\t    validated=false;\n\t\t}\n    }\n}\n)"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Script",
+  "dt": "Material Request",
+  "modified": "2019-10-07 00:50:25.637098",
+  "name": "Material Request-Client",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Material Request', {\n\trefresh(frm) {\n\t\t// your code here\n\t\t\n\n\n\t}\n})\n\nfrappe.ui.form.on('Material Request Item', {\n\trefresh(frm) {\n\t\t// your code here\n//\t\tif (frm.doc.material_request_type!=\"Material Transfer\" && )\n\t\t\n\t}\n})"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Script",
+  "dt": "Additional Salary",
+  "modified": "2020-01-09 21:39:43.701003",
+  "name": "Additional Salary-Client",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Additional Salary', {\n\tsetup(frm) {\n\t\t// your code here\n\t\tcur_frm.set_query(\"ind_salary_structure_assignment\", function(doc) {\n\t\t    return {\n\t\t        filters: {\n\t\t            \"employee\": cur_frm.doc.employee\n\t\t        }\n\t\t    };\n\t\t}\n\t\t);\n\t\t\n\t},\n\temployee(frm){\n\t\t    //this will fetch and set the most recent assignment.\n        frappe.db.get_link_options('Salary Structure Assignment', '',\n            {\n\t\t\t\temployee: cur_frm.doc.employee\n\t\t\t}\n\t\t).then(all_ssa =>{\n\t\t    frm.set_value(\"ind_salary_structure_assignment\", all_ssa[0].value);\n\t\t});\n\t}\t\n\t\n});\n"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Custom Script",
+  "dt": "Stock Entry",
+  "modified": "2020-02-04 00:54:54.696000",
+  "name": "Stock Entry-Client",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Stock Entry', {\n\tvalidate(frm) {\n\t\t// your code here\n\t\tfrm.doc.ind_furnace_total_capacity=10000*frm.doc.ind_running_furnaces;\n\t\tif (frm.doc.ind_item_group_for_melting_process==\"Molten Metal\" && frm.doc.from_bom && frm.doc.fg_completed_qty>frm.doc.ind_furnace_total_capacity)\n\t\t{\n\t\t    msgprint(\"For Quantity should be less than Furnace Total Capacity\");\n\t\t    validated = false;\n\t\t}\n\t\t\n\t\t\n\t}\n});\n\nfrappe.ui.form.on('Stock Entry Detail', {\n\tvalidate(frm) {\n\t\tif (frm.doc.item_group==\"Molten Metal\"){\n\t\t    frm.doc.ind_workstation=\"Melting Furnace\";\n\t\t}\n\t}\n});"
+ }
+]

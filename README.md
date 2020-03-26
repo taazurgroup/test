@@ -1,6 +1,6 @@
-## Test2
+## indipco
 
-Test2
+ERP Customisations for INDIPCO
 
 #### License
 

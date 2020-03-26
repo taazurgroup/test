@@ -4,15 +4,15 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include test2 *.css
-recursive-include test2 *.csv
-recursive-include test2 *.html
-recursive-include test2 *.ico
-recursive-include test2 *.js
-recursive-include test2 *.json
-recursive-include test2 *.md
-recursive-include test2 *.png
-recursive-include test2 *.py
-recursive-include test2 *.svg
-recursive-include test2 *.txt
-recursive-exclude test2 *.pyc
+recursive-include indipco *.css
+recursive-include indipco *.csv
+recursive-include indipco *.html
+recursive-include indipco *.ico
+recursive-include indipco *.js
+recursive-include indipco *.json
+recursive-include indipco *.md
+recursive-include indipco *.png
+recursive-include indipco *.py
+recursive-include indipco *.svg
+recursive-include indipco *.txt
+recursive-exclude indipco *.pyc
